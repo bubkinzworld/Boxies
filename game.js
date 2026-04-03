@@ -4,6 +4,7 @@ const scoreValue = document.getElementById("scoreValue");
 const itemsValue = document.getElementById("itemsValue");
 const levelValue = document.getElementById("levelValue");
 const message = document.getElementById("message");
+const touchButtons = Array.from(document.querySelectorAll(".touch-button"));
 
 const WORLD = {
   width: 960,
@@ -503,6 +504,45 @@ window.addEventListener("keydown", (event) => {
 
 window.addEventListener("keyup", (event) => {
   keys.delete(event.code);
+});
+
+function setTouchKeyState(code, isPressed, button) {
+  if (code === "KeyR" && isPressed) {
+    resetGame();
+    return;
+  }
+
+  if (isPressed) {
+    keys.add(code);
+    button.classList.add("is-pressed");
+  } else {
+    keys.delete(code);
+    button.classList.remove("is-pressed");
+  }
+}
+
+for (const button of touchButtons) {
+  const code = button.dataset.key;
+
+  const press = (event) => {
+    event.preventDefault();
+    setTouchKeyState(code, true, button);
+  };
+
+  const release = (event) => {
+    event.preventDefault();
+    setTouchKeyState(code, false, button);
+  };
+
+  button.addEventListener("pointerdown", press);
+  button.addEventListener("pointerup", release);
+  button.addEventListener("pointercancel", release);
+  button.addEventListener("pointerleave", release);
+}
+
+window.addEventListener("blur", () => {
+  keys.clear();
+  touchButtons.forEach((button) => button.classList.remove("is-pressed"));
 });
 
 game.style.width = `${WORLD.width}px`;

@@ -30,6 +30,7 @@
     <section class="instructions">
       Move with <kbd>Arrow Keys</kbd> or <kbd>WASD</kbd>. Collect green boxes, stomp red boxes from above,
       and touch the golden box to turn enemies into collectible movers for 5 seconds.
+      On phones, use the touch controls below.
       Press <kbd>R</kbd> to restart.
     </section>
 
@@ -37,6 +38,15 @@
       <div id="game" class="game" aria-label="Box Mario game area"></div>
       <div id="message" class="message hidden" aria-live="polite"></div>
     </div>
+
+    <section class="touch-controls" aria-label="Touch controls">
+      <div class="touch-controls__cluster">
+        <button class="touch-button" data-key="KeyA" aria-label="Move left">Left</button>
+        <button class="touch-button touch-button--jump" data-key="KeyW" aria-label="Jump">Jump</button>
+        <button class="touch-button" data-key="KeyD" aria-label="Move right">Right</button>
+      </div>
+      <button class="touch-button touch-button--restart" data-key="KeyR" aria-label="Restart level">Restart</button>
+    </section>
   </main>
 
   <script src="game.js"></script>
